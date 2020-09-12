@@ -18,6 +18,10 @@ fn main() {
         stdin().read_line(&mut guess).expect("Failed to read");
 
         let guess: u32 = match guess.trim().parse() {
+            Ok(69) => {
+                println!("nice.");
+                69
+            }
             Ok(num) => num,
             Err(_) => {
                 println!("that is not a number, dickwad!");
