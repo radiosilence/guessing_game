@@ -1,18 +1,39 @@
-use rand::Rng;
+use rand::prelude::*;
+use std::cmp::Ordering;
 use std::io::stdin;
 
 fn main() {
-    println!("Guess my ass!");
+    println!("guess my ass!");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let mut rng = thread_rng();
+    let secret_number = rng.gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    println!("ass number is: {}", secret_number);
 
-    println!("Please input yo guess...");
+    loop {
+        println!("input your fucking guess...");
 
-    let mut guess = String::new();
+        let mut guess = String::new();
 
-    stdin().read_line(&mut guess).expect("Failed to read");
+        stdin().read_line(&mut guess).expect("Failed to read");
 
-    println!("You guessed {}", guess);
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("that is not a number, dickwad!");
+                continue;
+            }
+        };
+
+        print!("{}? ", guess);
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("too small!"),
+            Ordering::Greater => println!("too massiv"),
+            Ordering::Equal => {
+                println!("finally...");
+                break;
+            }
+        }
+    }
 }
